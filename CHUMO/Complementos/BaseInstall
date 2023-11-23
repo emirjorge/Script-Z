@@ -1,0 +1,409 @@
+#!/bin/bash
+#By @ChumoGH|Plus}
+
+
+[[ -e /file ]] && _double=$(cat < /file) ||  {
+_double=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt")
+echo -e "$(echo -e "$_double" | grep ${IiP})" > /file
+}
+[[ -z ${_check2} ]] && {
+echo -e " BINARY NO FOUND"
+exit
+}
+
+install_fim () {
+fecha=`date +"%d-%m-%y"`;
+[[ ! -d /etc/ADMcgh ]] && mkdir /etc/ADMcgh
+unset name
+[[ -d /bin/ejecutar ]] && rm -rf /bin/ejecutar
+[[ -e /etc/adm-lite/gerar.sh ]] && rm -f /etc/adm-lite/gerar.sh
+mkdir /bin/ejecutar
+[[ -e /bin/ejecutar/menu_credito ]] && echo "" || echo "$(cat /etc/adm-lite/menu_credito|head -1)" > /bin/ejecutar/menu_credito && chmod +x /bin/ejecutar/menu_credito
+wget -q -O /bin/toolmaster https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Complementos/toolmaster 
+chmod +x /bin/toolmaster
+echo 'source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Complementos/free-men.sh)' > /bin/ejecutar/echo-ram.sh
+echo 'wget -q -O /bin/ejecutar/v-new.log https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/version/v-new.log' >> /bin/ejecutar/echo-ram.sh && bash /bin/ejecutar/echo-ram.sh
+echo '#!/bin/bash
+' > /bin/autoboot
+chmod +x /bin/autoboot
+crontab -l > /root/cron &> /dev/null 
+echo "@reboot /bin/autoboot" >> /root/cron
+crontab /root/cron &>/dev/null
+rm -f /root/cron
+echo "* * * * * root bash  /bin/autoboot" >> /etc/crontab
+service cron restart >/dev/null 2>&1
+if cat /etc/bash.bashrc | grep ADMcgh; then
+sed -i "/ADMcgh/d" /etc/bash.bashrc
+echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games/
+[[ -z $(locale | grep "LANG=" | cut -d "=" -f2) ]] && export LANG=en_US.UTF-8 
+DATE=$(date +"%d-%m-%y")
+TIME=$(date +"%T") 
+figlet -f slant "ChumoGH" | lolcat 
+echo -e "" 
+killall menu &> /dev/null
+/bin/autoboot &> /dev/null
+bash /bin/ejecutar/echo-ram.sh               
+echo -e " VPS SE INSTALO EL : " $(cat < /bin/ejecutar/fecha) 
+echo -e " NOMBRE DEL SERVIDOR : $HOSTNAME" 
+echo -e " TIEMPO EN LINEA : $(uptime -p)" 
+echo -e " MEMORIA RAM LIBRE : $(cat < /bin/ejecutar/raml)" 
+echo -e " Fecha/Hora del Servidor : $DATE" 
+echo -e " Hora del Servidor : $TIME" 
+echo -e "" 
+echo -e "\tRESELLER: \e[1;31m$(cat /etc/adm-lite/menu_credito|head -1)"
+echo -e "\033[1;39m" 
+echo -e " Bienvenido!"
+echo -e "\033[1;43m Teclee cgh , menu o adm para ver el MENU\033[0m." 
+echo -e "" 
+' > /etc/ADMcgh/bashrc
+echo "STARTUP AGREGADO EXITOSAMENTE"
+echo -e 'source /etc/ADMcgh/bashrc' >> /etc/bash.bashrc
+else
+#echo ""
+#echo -e "\t\033[92mRESELLER : "
+#echo -e "\t\e[1;33mVERSION: \e[1;31m$(cat /etc/)"
+#echo -e "\t\033[1;100mPARA MOSTAR PANEL BASH ESCRIBA:\e[0m\e[1;41m sudo menu \e[0m"
+sed -i "/ADMcgh/d" /etc/bash.bashrc
+echo 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games/
+[[ -z $(locale | grep "LANG=" | cut -d "=" -f2) ]] && export LANG=en_US.UTF-8 
+DATE=$(date +"%d-%m-%y")
+TIME=$(date +"%T") 
+figlet -f slant "ChumoGH" | lolcat 
+echo -e "" 
+killall menu &> /dev/null
+/bin/autoboot &> /dev/null
+bash /bin/ejecutar/echo-ram.sh
+echo -e " VPS SE INSTALO EL : " $(cat < /bin/ejecutar/fecha) 
+echo -e " NOMBRE DEL SERVIDOR : $HOSTNAME" 
+echo -e " TIEMPO EN LINEA : $(uptime -p)" 
+echo -e " MEMORIA RAM LIBRE : $(cat < /bin/ejecutar/raml)" 
+echo -e " Fecha/Hora del Servidor : $DATE" 
+echo -e " Hora del Servidor : $TIME" 
+echo -e "" 
+echo -e "\tRESELLER: \e[1;31m$(cat /etc/adm-lite/menu_credito|head -1)"
+echo -e "\033[1;39m" 
+echo -e " Bienvenido!"
+echo -e "\033[1;43m Teclee cgh , menu o adm para ver el MENU\033[0m." 
+echo -e "" 
+' > /etc/ADMcgh/bashrc
+#echo -e 'source /etc/ADMcgh/bashrc' >> /etc/bash.bashrc
+echo " STARTUP AGREGADO EXITOSAMENTE"
+echo -e 'source /etc/ADMcgh/bashrc' >> /etc/bash.bashrc
+fi
+[[ -e $HOME/lista ]] && rm $HOME/lista
+echo -e "0" > /bin/ejecutar/uskill
+[[ -e /bin/ejecutar/menu_credito ]] && echo "" || echo "$(cat /etc/adm-lite/menu_credito|head -1)" > /bin/ejecutar/menu_credito && chmod +x /bin/ejecutar/menu_credito
+echo "Verified【 $(cat /bin/ejecutar/menu_credito)" > /bin/ejecutar/exito
+echo -e "${cor[5]}NOMBRE AGREGADO EXITOSAMENTE"
+echo -e " \033[0m"
+echo "$fecha" > /bin/ejecutar/fecha
+clear
+msg -bar3
+echo -e "\033[0;33m
+       Nombre de tu servidor.... OPCIONAL
+       RECOMENDABLE 10 Caracteres Maximo!"
+msg -bar3
+echo -ne "\033[1;97m NOMBRE DEL SERVIDOR : \033[0m" && read name
+[[ -z "${name}" ]] || {
+echo $name > /etc/adm-lite/name
+chmod +x /etc/adm-lite/name
+echo $name > /root/name 
+figlet $name
+}
+clear
+msg -bar3
+echo -e "AÑADE TU DOMINIO ( OPCIONAL ) "
+msg -bar3
+echo -e "\033[0;33m
+       NO posees un Subdominio enlazado a
+       este IP Droplet, PRESIONA ENTER 
+	   CASO CONTRARIO, Colocalo AQUI!!"
+msg -bar3
+echo -ne "\033[1;97m Domain : \033[0m" && read dom
+[[ -z "${dom}" ]] && { 
+echo -e " OMITIENDO DOMAIN -> IP !!" | pv -qL 30 | lolcat
+rm -f /dominio.txt
+} || {
+echo ${dom} > /dominio.txt
+chmod +x /dominio.txt
+echo -e " DOMINIO ${dom} REGISTRADO" | pv -qL 30 | lolcat
+sleep 2s
+}
+clear
+msg -bar3
+echo -e "\033[1;32mCAMBIAR ZONA HORARIA EN ( * \033[1;33mMenu 7 \033[1;32m*\033[1;33m opcion 14 \033[1;32m)"
+msg -bar3
+echo -e "${cor[3]} ChumoGH-ADM Configurado Exitosamente!"
+msg -bar3
+echo -e "${cor[3]} |∆| ${cor[2]} Ahora puedes acceder al PANNEL"
+msg -bar3
+echo -e " \033[1;41m Use los Comandos: cgh, menu, adm"
+msg -bar3
+echo -e "${cor[2]} Para acceder al MENU, DISFRUTA LA ESTANCIA!"
+echo -e "${cor[2]} Reinicie para completar Instalacion - OPCIONAL - "
+echo -e " RECOMENDABLE ACCEDER COMO ROOT y/o ADMINISTRADOR\033[0m"
+echo -e " Fecha de Instalacion : $(cat < /bin/ejecutar/fecha)" 
+msg -bar3 
+echo -e "${cor[1]}       YA TIENES ACCESO ROOT A TU VPS?\n ESTO ES ESPECIAL PARA [AWS,GOOGLE,AZURE,ORACLE,ETC]\n SI ENTRASTE CON UN USUARIO DIFERENTE AL ROOT\n PRESIONA S, CASO CONTRARIO, IGNORA EL MENSAJE"
+msg -bar
+echo -e "\033[1;42m APLICAR FIX de PASSWD para LIBERAR ACCESO "
+echo -e "SI YA ERES ROOT, SE CAMBIARA TU CLAVE \033[0;33m "
+echo -ne "\033[0;32m"
+read -t 20 -p " Responde [ s | n ] : " -e -i "n" x
+[[ $x = @(s|S|y|Y) ]] && source <(curl -sSL  https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Complementos/root-pass.sh) || echo -e "\033[1;32mAplica FIX en ( * \033[1;33m Menu 7\033[1;32m *\033[1;33m opcion 9 \033[1;32m*\033[1;32m)"
+[[ -e /root/name ]] && figlet "$(less /root/name)" | lolcat || tittle
+return
+}
+
+install_ini () {
+#_TIME_START="$(date +%s)"
+_error=0
+msg -bar3
+declare -A cpu_model=$(uname -m)
+[[ $cpu_model = "aarch64" ]] && cpu_model=" ARM64 Pro" 
+echo -e "\033[97m"
+echo -e "\033[41m     -- INSTALAREMOS LO NECESARIO PARA EL ADM --"
+echo -e "     \033[44mSU IP REGISTRADA ES : $(wget -qO- ifconfig.me)\033[41m"
+echo -e "   \033[41m--  Arch : $(lscpu | grep "Vendor ID" | awk '{print $3}') SISTEMA  $(lsb_release -si) $(lsb_release -sr) --"
+echo -e "\033[100m   ATENCION A INSTALACION POR SI DEVUELVE UN ERROR "
+echo -e "\033[97m"
+msg -bar3
+locale-gen en_US.UTF-8 > /dev/null 2>&1
+update-locale LANG=en_US.UTF-8 > /dev/null 2>&1 && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # Instalando Paqueteria UTF............ $ESTATUS "
+#bsdmainutils
+[[ $(dpkg --get-selections|grep -w "bsdmainutils"|head -1) ]] || apt-get install bsdmainutils -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "bsdmainutils"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "bsdmainutils"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install bsdmainutils......... $ESTATUS "
+#screen
+[[ $(dpkg --get-selections|grep -w "screen"|head -1) ]] || apt-get install screen -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "screen"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "screen"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install screen............... $ESTATUS "
+#python
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || apt-get install python -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install python............... $ESTATUS "
+#python3
+[[ $(dpkg --get-selections|grep -w "python3"|head -1) ]] || apt-get install python3 -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python3"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "python3"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install python3.............. $ESTATUS "
+#python3-pip
+[[ $(dpkg --get-selections|grep -w "python3-pip"|head -1) ]] || apt-get install python3-pip -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "python3-pip"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "python3-pip"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install python3-pip.......... $ESTATUS "
+#npm
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || apt-get install npm -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "npm"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install npm.................. $ESTATUS "
+#nodejs
+[[ $(dpkg --get-selections|grep -w "nodejs"|head -1) ]] || apt-get install nodejs -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "nodejs"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "nodejs"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install nodejs............... $ESTATUS "
+#lsof
+[[ $(dpkg --get-selections|grep -w "lsof"|head -1) ]] || apt-get install lsof -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "lsof"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "lsof"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install lsof................. $ESTATUS "
+#snapd
+#ESTATUS=`echo -e "\e[3;32mDELETED .\e[0m"` &>/dev/null
+#[[ $(dpkg --get-selections|grep -w "snapd"|head -1) ]] && apt purge snapd -y &>/dev/null
+#echo -e "\033[97m  # apt-get purge snapd ................. $ESTATUS "
+#apache2
+[[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] || {
+ apt-get install apache2 -y &>/dev/null
+ sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
+ service apache2 restart > /dev/null 2>&1 &
+ }
+[[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install apache2.............. $ESTATUS "
+#nmap
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] || apt-get install nmap -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install nmap................. $ESTATUS "
+#socat
+[[ $(dpkg --get-selections|grep -w "socat"|head -1) ]] || apt-get install socat -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "socat"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "socat"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install socat................ $ESTATUS "
+#bc
+[[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || apt-get install bc -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install bc................... $ESTATUS "
+#netcat
+[[ $(dpkg --get-selections|grep -w "netcat"|head -1) ]] || apt-get install netcat -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "netcat"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "netcat"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install netcat............... $ESTATUS "
+#net-tools
+[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || apt-get net-tools -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install net-tools............ $ESTATUS "
+#cowsay
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] || apt-get install cowsay -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "cowsay"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install cowsay............... $ESTATUS "
+#nmap
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] || apt-get install nmap -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "nmap"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install nmap................. $ESTATUS "
+#jq
+[[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
+[[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || {
+ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
+let _error++ 
+}
+[[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] && ESTATUS=`echo -e "\e[3;32mINSTALADO\e[0m"` &>/dev/null
+echo -e "\033[97m  # apt-get install jq................... $ESTATUS "
+msg -bar3
+echo -e "\033[92m La instalacion de paquetes necesarios a finalizado"
+[[ ${_error} > 0 ]] && {
+echo -e ""
+echo -e "     SE ENCONTRARON ${_error} ERRORES "
+echo -e "  PRUEBA COPIAR LOS NOMBRES DE LOS PAQUETES "
+echo -e "      E INSTALARLOS DE FORMA MANUAL "
+echo -e "      apt install nombre-paquete -y"
+echo -e ""
+read -p " PRESIONA ENTER PARA CONTINUAR"
+}
+msg -bar3
+}
+
+valid_fun () {
+_check2BOT="$(echo -e "$_double" | grep ${IiP} | awk '{print $5}')"
+_check2RES="$(echo -e "$_double" | grep ${IiP} | awk '{print $7}')"
+msg -bar3
+echo -e ""
+echo -e "${cor[2]}\n\033[1;37m  SCRIPT DESARROLLADO por: @ChumoGH - Henry Chumo" | pv -qL 12
+echo -e ""
+msg -bar3
+echo -e "  ${cor[5]} ADM-LITE Mod ChumoGH-ADM REFACTORIZADO 2023" 
+msg -bar3
+echo -e "${cor[3]}     VERIFICANDO RAIZ DE DATOS DE LA LLAVE !!! "
+msg -bar3
+[[ -e ${SCPdir}/menu_credito ]] && ress="$(cat ${SCPdir}/menu_credito|head -1) " || ress="NULL ( no found ) "
+echo -ne "${cor[2]}\n\033[1;37m  RESELLER  : " | pv -qL 50 && sleep 1s && echo -e "\033[0;35m$ress" | pv -qL 50
+echo
+msg -bar3
+echo -ne "${cor[2]}\033[1;37m BOT -> " && sleep 1s && echo -ne "\033[0;35m$_check2BOT" | pv -qL 30 | lolcat 
+echo -ne "${cor[2]}\033[1;37m  ADMIN : " && sleep 1s && echo -ne "\033[0;35m$_check2RES" | pv -qL 30 | lolcat
+echo ""
+
+[[ ! -e /bin/autoboot ]] && {
+echo '#!/bin/bash
+clear
+#INICIO AUTOMATICO' >/bin/autoboot
+	chmod +x /bin/autoboot
+} || {
+	for proc in $(ps x | grep 'dmS' | grep -v 'grep' | awk {'print $1'}); do
+		screen -r -S "$proc" -X quit
+	done
+	screen -wipe >/dev/null
+echo '#!/bin/bash
+clear
+#INICIO AUTOMATICO' >/bin/autoboot
+	chmod +x /bin/autoboot
+}
+crontab -r >/dev/null 2>&1
+(
+	crontab -l 2>/dev/null
+	echo "@reboot /bin/autoboot"
+	echo "* * * * * /bin/autoboot"
+) | crontab -
+echo ""
+#
+echo '#!/bin/bash
+# Creado por @ChumoGH
+SCPdir="/etc/adm-lite"
+cd ${SCPdir} && ./menu' > /bin/menu && chmod +x /bin/menu
+#
+echo '#!/bin/bash
+# Creado por @ChumoGH
+SCPdir="/etc/adm-lite"
+[[ $1 = "-fix" ]] && {
+rm -f /etc/folteto
+rm -f /var/log/auth.log*
+echo '' > /var/log/auth.log
+cp /bin/adm /bin/menu
+}
+cd ${SCPdir} && ./menu' > /bin/cgh && chmod +x /bin/cgh
+#
+echo '#!/bin/bash
+# Creado por @ChumoGH
+SCPdir="/etc/adm-lite"
+cd ${SCPdir} && ./menu' > /bin/adm && chmod +x /bin/adm
+#
+service cron restart >/dev/null 2>&1
+service ssh restart >/dev/null 2>&1
+#[[ -e ${SCPdir}/cabecalho ]] && bash ${SCPdir}/cabecalho --instalar
+install_ini
+cor[2]="\033[1;37m"
+wget -q -O /var/www/html/index.html https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/html/index.html
+install_fim
+#[[ -e ${SCPdir}/cabecalho ]] && bash ${SCPdir}/cabecalho --instalar
+return
+}
+
+[[ $1 = '--finish' ]] && valid_fun || echo -e "HYSTERIA BINARY NO FOUND"
+
+#FIN
