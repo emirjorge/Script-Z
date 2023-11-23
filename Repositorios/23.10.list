@@ -1,0 +1,12 @@
+## Ubuntu 23.10
+
+deb http://us.archive.ubuntu.com/ubuntu/ mantic main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ mantic-updates main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ mantic universe
+deb http://us.archive.ubuntu.com/ubuntu/ mantic-updates universe
+deb http://us.archive.ubuntu.com/ubuntu/ mantic multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ mantic-updates multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ mantic-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu mantic-security main restricted
+deb http://security.ubuntu.com/ubuntu mantic-security universe
+deb http://security.ubuntu.com/ubuntu mantic-security multiverse
