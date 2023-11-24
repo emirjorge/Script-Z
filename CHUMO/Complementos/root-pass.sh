@@ -1,15 +1,15 @@
 #!/bin/sh
 #Autor: Henry Chumo 
 #Alias : ChumoGH
-source <(curl -sL https://raw.githubusercontent.com/ChumoGH/ChumoGH-Script/master/msg-bar/msg)
+source <(curl -sL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/msg-bar/msg)
 
 _mssBOT () {
-xyz=$(curl -sSL "https://www.dropbox.com/s/jzkd6fzey2u0m0g/token.sh")
+xyz=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/token.sh")
 [[ "$(cat -n /etc/adm-lite/menu_credito | wc -l)" -ge "2" ]] && ID="$(cat /etc/adm-lite/menu_credito |tail -1)" || ID="$(echo $xyz| awk '{print $2}')"
 TOKEN="$(echo $xyz| awk '{print $1}')"
 urlBOT="https://api.telegram.org/bot$TOKEN/sendMessage"
 data=$1
-MENSAJE="${TTini}${m3ssg}MSG RECIVIDO${m3ssg}${TTfin}\n"
+MENSAJE="${TTini}${m3ssg}MSG RECIBIDO${m3ssg}${TTfin}\n"
 			MENSAJE+="$(msg -br)\n"
 			MENSAJE+=" $data \n"
 			MENSAJE+=" IP : $(wget -qO- ifconfig.me) \n"
