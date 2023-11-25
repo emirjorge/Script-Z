@@ -4,6 +4,7 @@
 
 clear
 config="/usr/local/etc/trojan/config.json"
+configLOCK="/usr/local/etc/trojan/config.json.lock"
 temp="/etc/trojan/temp.json"
 trojdir="/etc/trojan" && [[ ! -d $trojdir ]] && mkdir $trojdir
 user_conf="/etc/trojan/user" && [[ ! -e $user_conf ]] && touch $user_conf
@@ -63,41 +64,45 @@ msg -bar3
 
 function chekKEY {
 [[ -z ${IP} ]] && IP=$(cat < /bin/ejecutar/IPcgh)
+[[ -z ${IP} ]] && IP=$(wget -qO- ifconfig.me)
 Key="$(cat /etc/cghkey)"
-_Key='/etc/cghkey'
 _double=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt")
 IiP="$(ofus "$Key" | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
-_check2="$(echo -e "$_double" | grep ${IiP} | awk '{print $1}')"
-[[ ! -e /etc/folteto ]] && wget --no-check-certificate -O /etc/folteto $IiP:81/ChumoGH/checkIP.log 
-cheklist="$(cat /etc/folteto)"
-chekKEY="$(echo -e "$cheklist" | grep ${Key} | awk '{print $5}')"
-chekIP="$(echo -e "$cheklist" | grep ${IP} | awk '{print $3}')"
-[[ -z ${chekKEY} || -z ${chekIP} ]] && {
-xyz=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/token.sh")
-ID="$(echo $xyz| awk '{print $2}')"
-TOKEN="$(echo $xyz| awk '{print $1}')"
-urlBOT="https://api.telegram.org/bot$TOKEN/sendMessage"
-echo 'clear&&clear
-echo -e "\n\n\n \033[0;31m==================================================
-   ¡ ${lLaM} KEY BANEADA  🚫 ! CONTACTE Su ADMINISTRADOR
- ================================================== \n\n
-  SI ESTO FUE UN ERROR - TECLEA ** cgh ** \n\n" 
-' > /bin/menu \
-[[ ! -d /etc/banned ]] && mkdir /etc/banned \
-chmod +x /bin/menu \
-mv /etc/adm-lite/menu /etc/banned/ \
-mv /etc/adm-lite/usercodes /etc/banned/ \
-[[ ! -e ${_Key} ]] && {
-rm -f /etc/folteto && rm -rf /lib/
+[[ -e /file ]] && _double=$(cat < /file) ||  {
+wget -q -O /file https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt
+_double=$(cat < /file)
 }
+_check2="$(echo -e "$_double" | grep ${IiP})"
+[[ ! -e /etc/folteto ]] && {
+wget --no-check-certificate -O /etc/folteto $IiP:81/ChumoGH/checkIP.log 
+cheklist="$(cat /etc/folteto)"
+echo -e "$(echo -e "$cheklist" | grep ${IP})" > /etc/folteto
+}
+[[ -z ${_check2} ]] && {
+mss_='\n BotGEN NO AUTORIZADO POR @ChumoGH '
+cat <<EOF >/bin/menu
+clear && clear
+echo -e "\n\n\033[1;31m==================================================\n ¡¡ 🚫 KEY BANEADA  🚫 ! CONTACTE Su ADMINISTRADOR! \n==================================================\n ¡¡ FECHA DE BANEO :$(date +%d/%m/%Y) HORA :$(date +%H:%M:%S) \n==================================================\n\n¡¡ ${mss_} \n\n==================================================\n"
+echo -e " \e[1;32m     --- SI CONSIDERA QUE FUE UN ERROR  ---  " | pv -qL 60
+echo -e " \e[1;32m     -- ${mss_} --  " | pv -qL 60
+echo -e "\n \e[1;93m           --- TECLEA  \e[1;93m --- \e[1;97mcgh -fix\e[1;93m ---  " | pv -qL 50
+echo -e "\n\033[1;31m==================================================\n\n"
+#echo "/etc/adm-lite/menu" > /bin/menu && chmod +x /bin/menu
+EOF
+
 rm -f /etc/folteto
+rm -f /etc/adm-lite/menu*
  			MENSAJE="${TTini}${m3ssg}MSG RECIVIDO${m3ssg}${TTfin}\n"
 			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+=" IP Clon: $(wget -qO- ifconfig.me) Rechazada\n"
+			MENSAJE+=" IP Clon: ${IP} Rechazada\n"
 			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+=" ${lLaM} INSECTO DETECTADO EN TROJAN_MOD ${lLaM}\n"
+			MENSAJE+=" INSECTO DETECTADO EN TROJAN-GO Plus\n"
 			MENSAJE+=" ---------------------------------------------\n"
-			MENSAJE+="       ${rUlq} Bot generador de key ${rUlq}\n"
+			MENSAJE+=" Key : ${Key}\n"
+			MENSAJE+=" ---------------------------------------------\n"
+			MENSAJE+=" HORA : $(printf '%(%D-%H:%M:%S)T')\n"
+			MENSAJE+=" ---------------------------------------------\n"
+			MENSAJE+="       ${rUlq} Bot ADMcgh de keyS ${rUlq}\n"
 			MENSAJE+="           ${pUn5A} By @ChumoGH ${pUn5A} \n"
 			MENSAJE+=" ---------------------------------------------\n"	
 			curl -s --max-time 10 -d "chat_id=$ID&disable_web_page_preview=1&text=$(echo -e "$MENSAJE")" $urlBOT &>/dev/null 	
@@ -561,7 +566,7 @@ trojanports=$(cat $config | jq -r .local_port)
 _tconex=$(netstat -nap | grep "$trojanports" | grep trojan  | grep ESTABLISHED | awk {'print $5'} | awk -F ":" '{print $1}' | sort | uniq | wc -l)
 	v1=$(cat /etc/adm-lite/v-local.log)
 	v2=$(cat /bin/ejecutar/v-new.log)
-	echo -e "\033[7;49;35m  =====>>►► 🐲 Menu TROJAN ChumoGH💥VPS 🐲 ◄◄<<=====    \033[0m"
+	#echo -e "\033[7;49;35m  =====>>►► 🐲 Menu TROJAN ChumoGH💥VPS 🐲 ◄◄<<=====    \033[0m"
 	msg -bar3
 	[[ $(uname -m 2> /dev/null) != x86_64 ]] && echo -e "	CPU : ARM64 - BINARIO : trojan-go"
 	[[ ${v1} = ${v2} ]] && echo -e "      \e[97m\033[1;44mPROYECT TROJAN BY @ChumoGH  [$v1]  \033[0m" || echo -e "   \e[97m\033[1;44mProyecto Trojan by @ChumoGH [$v1] >> \033[1;92m[$v2]  \033[0m"
@@ -1182,18 +1187,19 @@ main(){
 	do
 		_usor=$(printf '%-8s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
 		_usop=$(printf '%-1s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
-		[[ -e /bin/troj.sh ]] && enrap="\033[1;92m[Encendido]" || enrap="\033[0;31m[Apagado]"
+		[[ -e /bin/troj.sh ]] && enrap="\033[1;92m[ ACT ]" || enrap="\033[0;31m[ DESC ]"
+		[[ -e $configLOCK ]] && _v2LOCK="$(cat $configLOCK|wc -l)" || _v2LOCK=0
 		clear
 		title2
 		title "   Ram: \033[1;32m$_usor  \033[0;31m<<< \033[1;37mMENU Trojan \033[0;31m>>>  \033[1;37mCPU: \033[1;32m$_usop"
 		col "1)" "CREAR NUEVO USUARIO "
 		col "2)" "\033[0;92mRENOVAR UN USUARIO "
 		col "3)" "\033[0;31mREMOVER UN USUARIO "
-		col "4)" "VER DATOS DE USUARIOS "
+		col "4)" "VER USUARIOS REGISTRADOS \033[1;32m( $(cat $user_conf | wc -l) )"
 		col "5)" "VER USUARIOS CONECTADOS "
-		#col "5)" "\033[1;33mCONFIGURAR Trojan"
+		col "b)" "LOCK/UNLOCK USUUARIO $_v2LOCK"
 		msg -bar3
-		col "6)" "\033[1;33mEntrada Rapida $enrap"
+		col "6)" "\033[1;33mENTRAR CON  \033[1;31mtroj.sh $enrap"
 		msg -bar3
 		col "7)" "\033[1;33mMostrar/Editar Fichero interno"
 		col "8)" "\033[1;33mMenu Avanzado Trojan"
