@@ -246,7 +246,7 @@ service stunnel4 restart
 cd /root
 }
 clash-man () {
-source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/clash-beta.sh)
+source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/clash-beta.sh)
 }
 fixssh () {
 unset portserv
