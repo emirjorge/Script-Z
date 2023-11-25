@@ -2,17 +2,16 @@
 #Autor: Henry Chumo 
 #Alias : ChumoGH
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games/
-Key="$(cat /etc/cghkey)"
-_Key='/etc/cghkey'
-rm -f /var/log/syslog.* && rm -f /var/log/*.* && echo > /var/log/auth.log && _double=$(curl -sSL "https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Control/Control-Bot.txt")
+
+echo '@ChumoGH ' > /var/log/auth.log
+
 rm -rf /usr/.work
 #echo > /var/log/auth.log
 #killall rsyslog
 #systemctl restart rsyslog.service
 #clear&&clear
 rm -f /root/cron
-[[ ! -e ${_Key} ]] && rm -f /bin/menu
-  _puertas() {
+_puertas() {
     unset portas
     portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" | grep -v "COMMAND" | grep "LISTEN")
     while read port; do
@@ -21,11 +20,10 @@ rm -f /root/cron
     done <<<"$portas_var"
     i=1
     echo -e "$portas"
-  }
-  
+}
 
 reiniciar_ser () {
-screen -wipe
+screen -wipe &>/dev/null
 echo 3 > /proc/sys/vm/drop_caches 1> /dev/null 2> /dev/null
 sysctl -w vm.drop_caches=3 1> /dev/null 2> /dev/null
 swapoff -a && swapon -a 1> /dev/null 2> /dev/null
@@ -129,4 +127,5 @@ rm -f /file
 return
 }
 
-[[ "$1" = "--menu" ]] && reiniciar_ser || reiniciar_ser >> /root/Autoblog.log
+#[[ "$1" = "--menu" ]] && reiniciar_ser || reiniciar_ser >> /root/Autoblog.log
+reiniciar_ser >> /root/Autoblog.log
