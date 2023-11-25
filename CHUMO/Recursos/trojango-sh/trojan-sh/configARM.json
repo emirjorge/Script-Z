@@ -48,5 +48,21 @@
         "key": "",
         "cert": "",
         "ca": ""
+    },
+	"websocket": {
+		"enabled": true,
+		"path": "/",
+		"hostname": "0.0.0.0"
+	},
+	"mux": {
+		"enabled": true
+	},
+    "router": {
+        "enabled": true,
+        "block": [
+            "geoip:private"
+        ],
+        "geoip": "/usr/share/trojan-go/geoip.dat",
+        "geosite": "/usr/share/trojan-go/geosite.dat"
     }
 }
