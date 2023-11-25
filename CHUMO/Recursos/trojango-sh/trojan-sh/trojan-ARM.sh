@@ -22,7 +22,8 @@ fi
 NAME=trojan
 NAMEDOWN=trojan-go
 VERSION=$(curl -fsSL https://api.github.com/repos/p4gefau1t/trojan-go/releases/latest | grep tag_name | sed -E 's/.*"v(.*)".*/\1/')
-TARBALL="$NAMEDOWN-linux-arm.zip"
+#TARBALL="$NAMEDOWN-linux-arm.zip"
+[[ $(uname -m 2> /dev/null) != x86_64 ]] && TARBALL="$NAMEDOWN-linux-arm64.zip" || TARBALL="$NAMEDOWN-linux-amd64.zip"
 DOWNLOADURL="https://github.com/p4gefau1t/$NAMEDOWN/releases/download/v$VERSION/$TARBALL"
 TMPDIR="$(mktemp -d)"
 INSTALLPREFIX=/usr/local
@@ -38,6 +39,7 @@ cd "$TMPDIR"
 
 echo Downloading $NAME $VERSION...
 curl -LO --progress-bar "$DOWNLOADURL" || wget -q --show-progress "$DOWNLOADURL"
+[[ $(dpkg --get-selections|grep -w "unzip"|head -1) ]] || apt-get install unzip -y &>/dev/null
 #if wget -q --show-progress https://github.com/p4gefau1t/trojan-go/releases/download/v0.10.6/trojan-go-linux-arm.zip ; then
 #echo Downloading $NAME $VERSION...
 #fi
