@@ -54,7 +54,7 @@ wget -q -O /bin/ejecutar/msg https://raw.githubusercontent.com/emirjorge/Script-
 [[ -e /bin/ejecutar/autt ]] && { 
 name=$(cat < /bin/ejecutar/autt)
 echo "Haciendo COPIA DE USUARIOS EN $name " $tiempo >> /root/lm.log
-source <(curl -sL https://raw.githubusercontent.com/ChumoGH/ChumoGH-Script/master/back/autobackup.sh) 
+source <(curl -sL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/autobackup.sh) 
 } || {
 [[ -e /var/www/html/backup ]] && rm /var/www/html/backup
 echo "NO FileSystem " $tiempo >> /root/lm.log
