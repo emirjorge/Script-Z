@@ -1553,7 +1553,7 @@ install(){
 	install_ini
 	msg -bar3
 	blanco "	Esta por intalar v2ray!"
-	echo "source <(curl -sSL https://www.dropbox.com/s/yxpjpgcwyrvitl6/v2ray_manager.url.sh)" > /bin/v2r.sh
+	echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/v2ray_manager.url.sh)" > /bin/v2r.sh
 	chmod +x /bin/v2r.sh
 	msg -bar3
 	blanco " La instalacion puede tener\n alguna fallas!\n por favor observe atentamente\n el log de intalacion,\n este podria contener informacion\n sobre algunos errores!\n estos deveras ser corregidos de\n forma manual antes de continual\n usando el script"
