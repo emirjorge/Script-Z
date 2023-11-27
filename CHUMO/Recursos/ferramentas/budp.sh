@@ -1,6 +1,6 @@
 #!/bin/bash
 #01/06/2022
-# UPDATE 01/09/2023
+# UPDATE 26/11/2023
 #By @ChumoGH|Plus
 
 function chekKEY {
@@ -72,20 +72,20 @@ msg -bar
   msg -verm "[fail]"    
   msg -bar    
   msg -ama "No se pudo descargar el binario"    
-  msg -verm "Instalacion cancelada"    
+  msg -verm "Instalacion canselada"    
   read -p "ENTER PARA CONTINUAR"
   exit 0    
   fi
   } || {   
   chekKEY &> /dev/null 2>&1
-  if wget -O /bin/badvpn-udpgw https://github.com/emirjorge/Script-Z/raw/master/CHUMO/Recursos/ferramentas/badvpn-udpgw &>/dev/null ; then
+  if wget -O /bin/badvpn-udpgw https://github.com/emirjorge/Script-Z/raw/master/CHUMO/Recursos/ferramentas/badvpn-udpgw-plus &>/dev/null ; then
   chmod 777 /bin/badvpn-udpgw
   msg -verd "[OK]"    
   else    
   msg -verm "[fail]"    
   msg -bar    
   msg -ama "No se pudo descargar el binario"    
-  msg -verm "Instalacion cancelada"    
+  msg -verm "Instalacion canselada"    
   read -p "ENTER PARA CONTINUAR"
   exit 0    
   fi
@@ -97,7 +97,7 @@ msg -bar
     fi
     (
 	screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10 #--client-socket-sndbuf 10000
-	screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 10000 --max-connections-for-client 10 #--client-socket-sndbuf 10000
+	screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 1000 --max-connections-for-client 10 #--client-socket-sndbuf 10000
 #	screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10 
 #	screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 1000 --max-connections-for-client 10 
 	) || msg -ama "                Error al Activar BadVPN" 
@@ -119,14 +119,14 @@ msg -bar
 	[[ $(grep -wc "badvpn" /bin/autoboot) = '0' ]] && {
 						echo -e " AUTOREINICIO EN INACTIVIDAD PREACTIVADO !! " && sleep 2s
 						tput cuu1 && tput dl1
-						echo -e "netstat -tlpn | grep -w 7300 > /dev/null || {  screen -r -S 'badvpn' -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 10000 --max-connections-for-client 1000; }" >>/bin/autoboot
-						echo -e "netstat -tlpn | grep -w 7200 > /dev/null || {  screen -r -S 'badUDP72' -X quit;  screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 10000 --max-connections-for-client 1000; }" >>/bin/autoboot
+						echo -e "netstat -tlpn | grep -w 7300 > /dev/null || {  screen -r -S 'badvpn' -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10; }" >>/bin/autoboot
+						echo -e "netstat -tlpn | grep -w 7200 > /dev/null || {  screen -r -S 'badUDP72' -X quit;  screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 10000 --max-connections-for-client 10; }" >>/bin/autoboot
 					} || {
 						sed -i '/badvpn/d' /bin/autoboot
 						echo -e " AUTOREINICIO EN INACTIVIDAD REACTIVADO !! " && sleep 2s
 						tput cuu1 && tput dl1
-						echo -e "netstat -tlpn | grep -w 7300 > /dev/null || {  screen -r -S 'badvpn' -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 10000 --max-connections-for-client 10000 --client-socket-sndbuf 10000; }" >>/bin/autoboot
-						echo -e "netstat -tlpn | grep -w 7200 > /dev/null || {  screen -r -S 'badUDP72' -X quit;  screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 10000 --max-connections-for-client 10000 --client-socket-sndbuf 10000; }" >>/bin/autoboot
+						echo -e "netstat -tlpn | grep -w 7300 > /dev/null || {  screen -r -S 'badvpn' -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10; }" >>/bin/autoboot
+						echo -e "netstat -tlpn | grep -w 7200 > /dev/null || {  screen -r -S 'badUDP72' -X quit;  screen -dmS badUDP72 $(which badvpn-udpgw) --listen-addr 127.0.0.1:7200 --max-clients 1000 --max-connections-for-client 10; }" >>/bin/autoboot
 					}
 	#-------------------------
 } ||  sed -i '/badvpn-udpgw/d' /bin/autoboot
@@ -151,8 +151,8 @@ msg -bar
 read -p " DIJITA TU PUERTO CUSTOM PARA BADVPN :" -e -i "7100" port
 echo -e " VERIFICANDO BADVPN "
 msg -bar 
-screen -dmS badvpn$port /bin/badvpn-udpgw --listen-addr 127.0.0.1:${port} --max-clients 10000 --max-connections-for-client 10000 --client-socket-sndbuf 10000 && msg -ama "               BadVPN ACTIVADA CON EXITO"  || msg -ama "                Error al Activar BadVPN" 
-echo -e "netstat -tlpn | grep -w ${port} > /dev/null || {  screen -r -S 'badvpn'$port -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:${port} --max-clients 10000 --max-connections-for-client 10000 --client-socket-sndbuf 10000; }" >>/bin/autoboot
+screen -dmS badvpn$port /bin/badvpn-udpgw --listen-addr 127.0.0.1:${port} --max-clients 1000 --max-connections-for-client 10 && msg -ama "               BadVPN ACTIVADA CON EXITO"  || msg -ama "                Error al Activar BadVPN" 
+echo -e "netstat -tlpn | grep -w ${port} > /dev/null || {  screen -r -S 'badvpn'$port -X quit;  screen -dmS badvpn $(which badvpn-udpgw) --listen-addr 127.0.0.1:${port} --max-clients 1000 --max-connections-for-client 10; }" >>/bin/autoboot
 msg -bar
 return
   ;;
@@ -171,22 +171,14 @@ return
   ;;
   3) exit;;
   0) exit;;
- esac   
-
-	
+ esac   	
 fi
 unset pid_badvpn
 }
-
 BadVPN
-
 msg -bar
 clear&&clear
 msg -bar
 toilet -f pagga "ChumoGH-UDP" | lolcat
 msg -bar
-
-
 return
-
-
