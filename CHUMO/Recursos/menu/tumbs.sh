@@ -73,13 +73,33 @@ function aguarde() {
 function checkON () {
 #[[ ! -e /etc/fixrsyslog ]] && aguarde
 #find . -type f -size +10M -exec rm {} \;
-echo 'source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/gnula.sh)' > /bin/ejecutar/automatizar.sh && chmod +x /bin/ejecutar/automatizar.sh
-echo 'source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/killram.sh)' > /bin/ejecutar/gnula.sh && chmod +x /bin/ejecutar/gnula.sh
+echo -ne " COMPILANDO BINARIO DE AUTOPTIMIZACIONES "
+if wget https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/killram.sh &>/dev/null -O /bin/automatizar.sh &>/dev/null ; then
+echo -e "\033[1;32m DONE \n" && msg -bar3 
+chmod +x /bin/automatizar.sh &>/dev/null 
+else
+echo -e "\033[1;31m FAIL \n" && msg -bar3 
+rm -f /bin/automatizar.sh
+sleep 2s
+return
+fi
+echo -ne " COMPILANDO BINARIO DE AUTOPLIMPIEZAS "
+if wget https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu/killram.sh &>/dev/null -O /bin/gnula.sh &>/dev/null ; then
+echo -e " \033[1;32m DONE \n" && msg -bar3 
+chmod +x /bin/gnula.sh &>/dev/null 
+else
+echo -e " \033[1;31m FAIL \n" && msg -bar3 
+rm -f /bin/gnula.sh
+sleep 2s
+return
+fi
 sed -i "/automatizar.sh/d" /etc/crontab && sed -i "/gnula.sh/d" /etc/crontab
-echo "00 03 * * *	root	bash /bin/ejecutar/automatizar.sh" >> /etc/crontab
-echo "00 * * * *	root 	bash /bin/ejecutar/gnula.sh" >> /etc/crontab
+echo "00 03 * * *	root	bash /bin/automatizar.sh" >> /etc/crontab
+echo "00 * * * *	root	bash /bin/gnula.sh" >> /etc/crontab
 #echo 'echo "$(printf '%(%H:%M:%S)T')" >> /root/clearlog.txt' >> /bin/autoboot
 service cron restart >/dev/null 2>&1
+systemctl enable cron &>/dev/null
+systemctl start cron &>/dev/null
 cat /etc/crontab | tail -n5
 rm -f /root/cron
 msg -azu " Tarea programada cada $(msg -verd "[ $(crontab -l|grep 'ejecutar'|awk '{print $2}'|sed $'s/[^[:alnum:]\t]//g')HS ]")"
