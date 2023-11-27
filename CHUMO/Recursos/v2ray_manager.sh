@@ -1553,7 +1553,7 @@ install(){
 	install_ini
 	msg -bar3
 	blanco "	Esta por intalar v2ray!"
-	echo "source <(curl -sSL  https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/v2ray_manager.url.sh)" > /bin/v2r.sh
+	echo "source <(curl -sSL https://www.dropbox.com/s/yxpjpgcwyrvitl6/v2ray_manager.url.sh)" > /bin/v2r.sh
 	chmod +x /bin/v2r.sh
 	msg -bar3
 	blanco " La instalacion puede tener\n alguna fallas!\n por favor observe atentamente\n el log de intalacion,\n este podria contener informacion\n sobre algunos errores!\n estos deveras ser corregidos de\n forma manual antes de continual\n usando el script"
@@ -1586,29 +1586,41 @@ systemctl daemon-reload &>/dev/null
 systemctl start v2ray &>/dev/null
 systemctl enable v2ray &>/dev/null
 systemctl restart v2ray.service
-
-msg -bar3
-
-		[[ -e /bin/xr.sh ]] && xr.sh || {
-		xray
-		echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/xray_manager.sh)" > /bin/xr.sh
-		chmod +x /bin/xr.sh
-				clear
-				msg -bar3
-				blanco " Se ha agregado un autoejecutor en el Sector de Inicios Rapidos"
-				msg -bar3
-				blanco "	  Para Acceder al menu Rapido \n	     Utilize * xr.sh * !!!"
-				msg -bar3
-				echo -e "		\033[4;31mNOTA importante\033[0m"
-				echo -e " \033[0;31mSi deseas desabilitar esta opcion, apagala"
-				echo -e " Y te recomiendo, no alterar nada en este menu, para"
-				echo -e "             Evitar Errores Futuros"
-				echo -e "     ESTE ES UN DUPLICADO V2RAY CON MODULO XRAY"
-				echo -e " y causar problemas en futuras instalaciones.\033[0m"
-				msg -bar3
-				continuar
-				read foo
-		}
+clear&&clear
+	title "   INSTALACION DE XRAY MOD MENU "
+	echo -e " \033[0;31mEsta opcion es aparte, para habilitar XRAY Install"
+	echo -e " Habilitaremos el modulo XRAY previo al V2RAY ya instalado \033[0m"
+		echo -e "  Accederas al pannel original si es la primera vez !!\n\033[0m"
+	msg -bar3
+	blanco " Deseas instalar el XRAY ? [S/N]" 0
+	read opcion
+	msg -bar3
+	case $opcion in
+		[Ss]|[Yy]) 
+					msg -bar3
+					[[ -e /bin/xr.sh ]] && xr.sh || {
+					xray
+					echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/xray_manager.sh)" > /bin/xr.sh
+					chmod +x /bin/xr.sh
+							clear
+							msg -bar3
+							blanco " Se ha agregado un autoejecutor en el Sector de Inicios Rapidos"
+							msg -bar3
+							blanco "	  Para Acceder al menu Rapido \n	     Utilize * xr.sh * !!!"
+							msg -bar3
+							echo -e "		\033[4;31mNOTA importante\033[0m"
+							echo -e " \033[0;31mSi deseas desabilitar esta opcion, apagala"
+							echo -e " Y te recomiendo, no alterar nada en este menu, para"
+							echo -e "             Evitar Errores Futuros"
+							echo -e "     ESTE ES UN DUPLICADO V2RAY CON MODULO XRAY"
+							echo -e " y causar problemas en futuras instalaciones.\033[0m"
+							msg -bar3
+							continuar
+							read foo
+					}
+		;;
+		[Nn]) continuar && read foo;;
+	esac
 #restart_v2r
 }
 
@@ -1881,7 +1893,7 @@ chmod +x /bin/xr.sh
 }
 
 enon(){
-echo "source <(curl -sSL  https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/v2ray_manager.url.sh)" > /bin/v2r.sh
+echo "source <(curl -sSL https://raw.githubusercontent.com/emirjorge/Script-Z/master/CHUMO/Recursos/menu_inst/v2ray_manager.url.sh)" > /bin/v2r.sh
 chmod +x /bin/v2r.sh
 		clear
 		msg -bar3
