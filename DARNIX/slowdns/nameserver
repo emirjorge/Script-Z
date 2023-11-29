@@ -1,5 +1,5 @@
 #!/bin/sh
-REPOS="https://raw.githubusercontent.com/darnix1/vip/main/"
+REPOS="https://raw.githubusercontent.com/emirjorge/Script-Z/master/DARNIX/"
 ns_domain_cloudflare() {
 	DOMAIN="aing.my.id"
 	DOMAIN_PATH=$(cat /etc/xray/domain)
